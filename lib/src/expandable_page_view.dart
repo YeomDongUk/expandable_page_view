@@ -155,8 +155,8 @@ class ExpandablePageView extends StatefulWidget {
         super(key: key);
 
   ExpandablePageView.builder({
-    required int itemCount,
     required WidgetBuilder itemBuilder,
+    this.itemCount,
     this.controller,
     this.onPageChanged,
     this.reverse = false,
@@ -177,7 +177,6 @@ class ExpandablePageView extends StatefulWidget {
     Key? key,
   })  : assert(estimatedPageSize >= 0.0),
         children = null,
-        itemCount = itemCount,
         itemBuilder = itemBuilder,
         super(key: key);
 
@@ -266,8 +265,7 @@ class _ExpandablePageViewState extends State<ExpandablePageView> {
       _currentPage = _sizes.length - 1;
       widget.onPageChanged?.call(_currentPage);
 
-      _previousPage = (_currentPage + differenceFromPreviousToCurrent)
-          .clamp(0, _sizes.length - 1);
+      _previousPage = (_currentPage + differenceFromPreviousToCurrent).clamp(0, _sizes.length - 1);
     }
 
     _previousPage = _previousPage.clamp(0, _sizes.length - 1);
@@ -355,8 +353,7 @@ class _ExpandablePageViewState extends State<ExpandablePageView> {
           index,
           OverflowPage(
             onSizeChange: (size) => setState(
-              () => _sizes[index] =
-                  _isHorizontalScroll ? size.height : size.width,
+              () => _sizes[index] = _isHorizontalScroll ? size.height : size.width,
             ),
             child: child,
             alignment: widget.alignment,
